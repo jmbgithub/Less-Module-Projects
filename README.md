@@ -33,9 +33,9 @@ This module handles requests to files with extension `*.less` that are stored in
 Installation
 ------------
 
-There are couple of approaches to use this module in Sitefinity.
+There are several ways you can use this module in Sitefinity.
 
-Since the module depends on the Sitefiinty assembly you should add a reference to Sitefinity assembly.
+Since the module depends on the Sitefiinty assembly you should add a reference to Sitefinity assembly (from the bin folder of your Sitefinity project).
 
 The build order is as follows:
 
@@ -45,9 +45,13 @@ The build order is as follows:
 - Copy the Telerik.Sitefinity.Less assembly to the bin folder of the Sitefinity application.
 - Copy the Telerik.Less assembly to the bin folder of the Sitefinity application.
 
-With the current implementation the module is self-registered. Once you copy the assembly to the bin folder of the application on the next load the module would be automatically registered.
+After you build the Telerik.Less and Telerik.Sitefinity.Less modules you should copy their assemblies from each modules's Debug folder and transfer the assemblies to the bin folder of your SitefinityWebApp project. Build SitefinityWebApp.
+
+With the current implementation the Less module is self-registered. Once you copy the assembly to the bin folder of the application on the next load the module would be automatically registered. 
 
 This behavior could be changed if you remove the `PreApplicationStartMethodAttribute` from the `AssemblyInfo.cs` file of the `Telerik.Sitefinity.Less` project and add the call to the `RegisterModule` method in the `Initialize` method of the `LessModule.cs` file.
+
+What you need to do next is go to `Administration -> Modules and services` and activate the Less module.
 
 Another approach is to create new solution that holds the Sitefinity project, `Telerik.Less` and `Telerik.Sitefinity.Less` projects. Then you could configure the output folder of `Telerik.Less` and `Telerik.Sitefinity.Less` projects to be the Sitefinity application's bin folder. Thus when you build the solution the module will be copied automatically and you would need to only refresh the page.
 
