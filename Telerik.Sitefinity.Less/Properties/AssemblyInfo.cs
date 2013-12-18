@@ -36,9 +36,9 @@ using Telerik.Sitefinity.Less;
 //
 // You can specify all the values or you can default the Build and Revision Numbers 
 // by using the '*' as shown below:
-// [assembly: AssemblyVersion("6.2.4910.0")]
-[assembly: AssemblyVersion("6.2.4910.0")]
-[assembly: AssemblyFileVersion("6.2.4910.0")]
+// [assembly: AssemblyVersion("6.3.5000.0")]
+[assembly: AssemblyVersion("6.3.5000.0")]
+[assembly: AssemblyFileVersion("6.3.5000.0")]
 
 [assembly: WebResource("Telerik.Sitefinity.Less.Module.Web.Resources.CustomStylesKendoUIView.css", "text/css", PerformSubstitution = true)]
 [assembly: WebResource("Telerik.Sitefinity.Less.Module.Web.Resources.paging.png", "image/gif")]

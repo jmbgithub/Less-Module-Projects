@@ -36,7 +36,7 @@ namespace Telerik.Sitefinity.Less
 		public override void Initialize(ModuleSettings settings)
 		{
 			base.Initialize(settings);
-			ObjectFactory.Container.RegisterType<ILessCompiler, SitefinityLessCompiler>(new InjectionConstructor());
+            ObjectFactory.Container.RegisterType<ILessCompiler, SitefinityLessCompiler>(new ContainerControlledLifetimeManager(),new InjectionConstructor());
 			App.WorkWith()
 				.Module(settings.Name)
 					.Initialize();

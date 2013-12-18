@@ -2,6 +2,9 @@
 using System.Diagnostics;
 using System.IO;
 using System.Reflection;
+using System.Threading;
+using System.Web.UI;
+using System.Web.UI.WebControls;
 using Telerik.Windows.Zip;
 
 namespace Telerik.Less
@@ -152,27 +155,43 @@ namespace Telerik.Less
 		/// <returns>Stream that holds the result of parsing.</returns>
 		private string ParseLess(string binPath, string filePath)
 		{
-			Process process = new Process();
+            string result = string.Empty;
 
-			process.StartInfo.WorkingDirectory = binPath;
-			process.StartInfo.FileName = Path.Combine(binPath, LessCompiler.ResFolder, "node.exe");
-			process.StartInfo.Arguments = Path.Combine(binPath + LessCompiler.ResFolder) + "\\bin\\lessc \"" + filePath + "\"";
-			process.StartInfo.RedirectStandardOutput = true;
-			process.StartInfo.UseShellExecute = false;
-			process.Start();
-			string result = string.Empty;
-			try
-			{
-				result = process.StandardOutput.ReadToEnd();
-			}
-			catch (OutOfMemoryException)
-			{
-				throw new OutOfMemoryException("There was not enough memory to perform the reading!");
-			}
+            string nodePath = Path.Combine(binPath, LessCompiler.ResFolder, "node.exe") + " ";
 
-			process.WaitForExit();
+           
+                
+            using (Process process = new Process())
+            {
+                process.StartInfo.WorkingDirectory = binPath;
+                process.StartInfo.FileName = "cmd.exe";
+                process.StartInfo.Arguments = "/c " + nodePath  +Path.Combine(binPath + LessCompiler.ResFolder) + "\\bin\\lessc \"" + filePath + "\"";
+                process.StartInfo.UseShellExecute = false;
+                process.StartInfo.RedirectStandardOutput = true;
+                process.StartInfo.CreateNoWindow = true;
+                process.StartInfo.RedirectStandardError = true;                
+                process.Start();
 
+                try
+                {                    
+                    result = process.StandardOutput.ReadToEnd();
+                    string error = process.StandardError.ReadToEnd();
+                    if(!string.IsNullOrEmpty(error))
+                    {                        
+                        result = error;
+                    }
+                    
+                }
+                catch (OutOfMemoryException)
+                {
+                    throw new OutOfMemoryException("There was not enough memory to perform the reading!");
+                }
+
+                process.Close();
+            }
+               
+           
 			return result;
-		}
+		}        
 	}
 }
