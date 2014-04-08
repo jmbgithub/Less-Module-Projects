@@ -1,4 +1,4 @@
-using System.Reflection;
+﻿using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Web;
 using System.Web.UI;
@@ -11,9 +11,9 @@ using Telerik.Sitefinity.Less;
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Telerik")]
-[assembly: AssemblyProduct("Telerik Sitefinity CMS")]
-[assembly: AssemblyCopyright("Copyright © Telerik 2013")]
-[assembly: AssemblyTrademark("Sitefinity")]
+[assembly: AssemblyProduct("Telerik.Sitefinity.Less")]
+[assembly: AssemblyCopyright("Copyright ©  2013 Telerik")]
+[assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
 // Registers ModuleInstaller.PreApplicationStart() to be executed prior to the application start
@@ -36,9 +36,9 @@ using Telerik.Sitefinity.Less;
 //
 // You can specify all the values or you can default the Build and Revision Numbers 
 // by using the '*' as shown below:
-// [assembly: AssemblyVersion("6.3.5000.0")]
-[assembly: AssemblyVersion("6.3.5000.0")]
-[assembly: AssemblyFileVersion("6.3.5000.0")]
+// [assembly: AssemblyVersion("1.0.*")]
+[assembly: AssemblyVersion("1.0.0.0")]
+[assembly: AssemblyFileVersion("1.0.0.0")]
 
 [assembly: WebResource("Telerik.Sitefinity.Less.Module.Web.Resources.CustomStylesKendoUIView.css", "text/css", PerformSubstitution = true)]
 [assembly: WebResource("Telerik.Sitefinity.Less.Module.Web.Resources.paging.png", "image/gif")]

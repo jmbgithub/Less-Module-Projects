@@ -37,9 +37,9 @@ namespace Telerik.Less
 		/// </summary>
 		/// <param name="filePath">Path to the LESS file.</param>
 		/// <returns>Compiled CSS.</returns>
-		public string CompileFile(string filePath)
+		public string CompileFile(string filePath, bool shouldMinify)
 		{
-			return this.ParseLess(this.PrepareDestinationPath(LessCompiler.DestFolder), filePath);
+			return this.ParseLess(this.PrepareDestinationPath(LessCompiler.DestFolder), filePath, shouldMinify);
 		}
 
 		/// <summary>
@@ -153,7 +153,7 @@ namespace Telerik.Less
 		/// <param name="binPath">Path to node.exe</param>
 		/// <param name="filePath">Path to the file that should be parsed.</param>
 		/// <returns>Stream that holds the result of parsing.</returns>
-		private string ParseLess(string binPath, string filePath)
+		private string ParseLess(string binPath, string filePath, bool shouldMinify)
 		{
             string result = string.Empty;
 
@@ -165,7 +165,16 @@ namespace Telerik.Less
             {
                 process.StartInfo.WorkingDirectory = binPath;
                 process.StartInfo.FileName = "cmd.exe";
-                process.StartInfo.Arguments = "/c " + nodePath  +Path.Combine(binPath + LessCompiler.ResFolder) + "\\bin\\lessc \"" + filePath + "\"";
+                if (shouldMinify)
+                {
+                    process.StartInfo.Arguments = "/c " + nodePath + Path.Combine(binPath + LessCompiler.ResFolder) + "\\bin\\lessc -x \"" + filePath + "\"";
+
+                }
+                else
+                {
+                    process.StartInfo.Arguments = "/c " + nodePath + Path.Combine(binPath + LessCompiler.ResFolder) + "\\bin\\lessc \"" + filePath + "\"";
+
+                }
                 process.StartInfo.UseShellExecute = false;
                 process.StartInfo.RedirectStandardOutput = true;
                 process.StartInfo.CreateNoWindow = true;

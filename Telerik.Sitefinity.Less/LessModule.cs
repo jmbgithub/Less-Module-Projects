@@ -39,7 +39,8 @@ namespace Telerik.Sitefinity.Less
             ObjectFactory.Container.RegisterType<ILessCompiler, SitefinityLessCompiler>(new ContainerControlledLifetimeManager(),new InjectionConstructor());
 			App.WorkWith()
 				.Module(settings.Name)
-					.Initialize();
+					.Initialize()
+                    .Configuration<LessConfig>();
 		}
 
 		public override void Install(SiteInitializer initializer)
@@ -52,7 +53,7 @@ namespace Telerik.Sitefinity.Less
 
 		protected override ConfigSection GetModuleConfig()
 		{
-			return null;
+			return Config.Get<LessConfig>();
 		}
 
 		#endregion
